@@ -8,11 +8,14 @@ pygame.display.set_caption("Planer Simulation")
 
 WHITE = (255, 255, 255)
 YELLOW = (255, 255, 0)
+BLUE = (100, 149, 237)
+RED = (188, 39, 50)
+DARK_GREY = (80, 78, 81)
 
 class Planet:
     AU = 149.6e6 * 1000
     G = 6.6742e-11
-    SCALE = 250 / AU
+    SCALE = 200 / AU
     TIMESTEP = 3600 * 24
 
     def __init__(self, x, y, radius, color, mass):
@@ -41,7 +44,12 @@ def main():
     sun = Planet(0, 0, 30, YELLOW, 1.98892 * 10**30)
     sun.sun = True
 
-    planets = [sun]
+    earth = Planet(-1 * Planet.AU, 0, 16, BLUE, 5.9742 * 10**24)
+    mars = Planet(-1.524 * Planet.AU, 0, 12, RED, 6.39 * 10**23)
+    mercury = Planet(0.387 * Planet.AU, 0, 8, DARK_GREY, 3.30 * 10**23)
+    venus = Planet(0.723* Planet.AU, 0, 14, WHITE, 4.8685 * 10**24)
+
+    planets = [sun, earth, mars, mercury, venus]
 
     while run:
         clock.tick(60)
@@ -52,7 +60,7 @@ def main():
         for planet in planets:
             planet.draw(WIN)
         pygame.display.update()
-        
+
     pygame.quit()
 
 main()
