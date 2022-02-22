@@ -69,6 +69,7 @@ class Planet:
         self.y += self.y_vel * self.TIMESTEP
         self.orbit.append((self.x, self.y))
 
+
 def main():
     run = True
     clock = pygame.time.Clock()
@@ -90,6 +91,7 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
         for planet in planets:
+            planet.update_position(planets)
             planet.draw(WIN)
         pygame.display.update()
 
