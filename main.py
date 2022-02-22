@@ -39,7 +39,7 @@ class Planet:
         pygame.draw.circle(win, self.color, (x, y), self.radius)
     
     def attraction(self, other):
-        other_x, other_y = other.x, other,y
+        other_x, other_y = other.x, other.y
         distance_x = other_x - self.y
         distance_y = other_y - self.y
         distance = math.sqrt(distance_x ** 2 + distance_y ** 2)
@@ -52,6 +52,22 @@ class Planet:
         force_x = math.cos(theta) * force
         force_y = math.sin(theta) * force
         return force_x, force_y
+
+    def update_position(self, planets):
+        total_fx = total_fy = 0
+        for planet in planets:
+            if self == planet:
+                continue
+            fx, fy = self.attraction(planet)
+            total_fx += fx
+            total_fy += fy
+
+        self.x_vel = total_fx / self.mass * self.TIMESTEP
+        self.y_vel += total_fy / self.mass * self.TIMESTEP
+
+        self.x += self.x_vel * self.TIMESTEP
+        self.y += self.y_vel * self.TIMESTEP
+        self.orbit.append((self.x, self.y))
 
 def main():
     run = True
