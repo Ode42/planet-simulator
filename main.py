@@ -12,6 +12,7 @@ class Planet:
     G = 6.6742e-11
     SCALE = 250 / AU
     TIMESTEP = 3600 * 24
+    
     def __init__(self, x, y, radius, color, mass):
         self.x = x
         self.y = y
