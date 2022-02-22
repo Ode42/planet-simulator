@@ -5,7 +5,9 @@ pygame.init()
 WIDTH, HEIGHT = 800, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Planer Simulation")
+
 WHITE = (255, 255, 255)
+YELLOW = (255, 255, 0)
 
 class Planet:
     AU = 149.6e6 * 1000
@@ -36,12 +38,21 @@ def main():
     run = True
     clock = pygame.time.Clock()
 
+    sun = Planet(0, 0, 30, YELLOW, 1.98892 * 10**30)
+    sun.sun = True
+
+    planets = [sun]
+
     while run:
         clock.tick(60)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+        for planet in planets:
+            planet.draw(WIN)
+        pygame.display.update()
+        
     pygame.quit()
 
 main()
